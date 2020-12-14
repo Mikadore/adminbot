@@ -18,18 +18,18 @@ export class BanCommand implements Command {
                 await mbr.ban({
                     reason: reason
                 });
-                msg.channel.send(`Succesfully banned <@${mbr.user.id}>`).catch(err => console.error(err));
+                msg.channel.send(`Succesfully banned <@${mbr.user.id}>`).catch(console.error);
             } catch 
             {
-                msg.channel.send(`Cannot ban <@${mbr.user.id}>`).catch(err => console.error(err));
+                msg.channel.send(`Cannot ban <@${mbr.user.id}>`).catch(console.error);
             }
         } catch 
         {
-            msg.channel.send(`Cannot find user '${user}'!`).catch(err => console.error(err));
+            msg.channel.send(`Cannot find user \`${user}\`!`).catch(console.error);
         }
     }
 
-    public command = "ban";
+    public command = ["ban", "b"];
     
     public metadata = {
         name: "Ban",

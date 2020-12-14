@@ -1,12 +1,17 @@
 import {Client} from 'discord.js';
 import {Module} from './module';
 import {Command} from './command';
+
+export const version  = "1.0.0";
+export const name     = "adminbot";
+
 export class Bot 
 {
     private bot: Client;
     private prefix: string;
     private token: string;
-    private commands: Command[] = []; 
+
+    public  commands: Command[] = []; 
 
     constructor(token: string, prefix: string)
     {
@@ -17,15 +22,21 @@ export class Bot
 
     public registerModule(module : Module) 
     {
-        for(let command of module.commands)
-        {
-            this.commands.push(command);
-        }
+        module.register(this);
     }
 
     public run()
     {   
+        console.log("Starting...");
         this.bot.on('ready', () => {
+            this.bot.user?.setPresence({
+                status: "online",
+                afk: false,
+                activity: {
+                    type: "PLAYING",
+                    name: `${this.prefix}help`
+                }
+            }).catch(console.error);
             console.log(`Started the bot and logged in as ${this.bot.user?.tag}`);
         });
         this.bot.on('message', async msg => {
@@ -37,15 +48,15 @@ export class Bot
                     let array = msg.content.split(' ');
                     let command_str = array[0].substring(this.prefix.length);
 
-                    const command = this.commands.find(cmd => cmd.command == command_str);
+                    const cmd = this.commands.find(cmd => (cmd.command.find(elem => elem === command_str) != undefined));
 
-                    if(command === undefined)
+                    if(cmd === undefined)
                     {
-                        msg.reply(`Unknown command '${command_str}'! Use '${this.prefix}help' to see the usage of this bot`).catch(err => console.error(err));
+                        msg.reply(`Unknown command '${command_str}'! Use '${this.prefix}help' to see the usage of this bot`).catch(console.error);
                     } else 
                     {
                         let content = array.slice(1).join(' ');
-                        await command.run(content.trim(), msg, this.bot);
+                        await cmd.run(content.trim(), msg, this.bot);
                     }
                 }
             }

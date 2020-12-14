@@ -23,11 +23,11 @@ export class KickCommand implements Command {
             }
         } catch 
         {
-            msg.channel.send(`Cannot find user '${user}'!`).catch(err => console.error(err));
+            msg.channel.send(`Cannot find user \`${user}\`!`).catch(err => console.error(err));
         }
     }
 
-    public command = "kick";
+    public command = ["kick", "k"];
     
     public metadata = {
         name: "Kick",

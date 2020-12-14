@@ -1,6 +1,7 @@
-import {Command} from './command';
+import {Command}    from './command';
+import {Bot}        from './bot';  
 
 export interface Module {
-    commands: Command[];
+    register(bot: Bot) : void;
     name: string;
 }
