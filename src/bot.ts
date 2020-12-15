@@ -7,11 +7,11 @@ export const name     = "adminbot";
 
 export class Bot 
 {
-    private bot: Client;
-    private prefix: string;
-    private token: string;
+    private bot:        Client;
+    private token:      string;
 
-    public  commands: Command[] = []; 
+    public  prefix:     string;
+    public  commands:   Command[] = []; 
 
     constructor(token: string, prefix: string)
     {
@@ -52,11 +52,12 @@ export class Bot
 
                     if(cmd === undefined)
                     {
-                        msg.reply(`Unknown command '${command_str}'! Use '${this.prefix}help' to see the usage of this bot`).catch(console.error);
+                        await msg.reply(`Unknown command '${command_str}'! Use '${this.prefix}help' to see the usage of this bot`).catch(console.error);
                     } else 
                     {
                         let content = array.slice(1).join(' ');
-                        await cmd.run(content.trim(), msg, this.bot);
+                        //SHAN'T throw
+                        await cmd.run(content.trim(), msg, this.bot).catch(console.error);
                     }
                 }
             }

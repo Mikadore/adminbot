@@ -31,7 +31,7 @@ export class BanCommand implements Command {
             }
         } catch 
         {
-            await msg.channel.send(`Cannot find user \`${user}\`!`).catch(console.error);
+            await msg.channel.send(`Cannot find user ${user}!`).catch(console.error);
         }
     }
 
@@ -39,7 +39,7 @@ export class BanCommand implements Command {
     
     public metadata = {
         name: "Ban",
-        usage: "ban <user> <reason>",
+        usage: "ban <user> <optional | reason>",
         description: "Bans a user from the server the command is invoked in",
         module: "Administration"
     };

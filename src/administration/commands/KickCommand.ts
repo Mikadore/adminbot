@@ -37,7 +37,7 @@ export class KickCommand implements Command {
     
     public metadata = {
         name: "Kick",
-        usage: "kick <user> <reason>",
+        usage: "kick <user> <optional | reason>",
         description: "Kicks a user from the server the command is invoked in",
         module: "Administration"
     };

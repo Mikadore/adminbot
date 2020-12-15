@@ -14,7 +14,7 @@ export class Utility implements Module {
             bot.commands.push(cmd);
         }
         //register special commands
-        const help = new HelpCommand(bot.commands);
+        const help = new HelpCommand(bot.commands, bot.prefix);
     }
     name = "Utility";
 };
