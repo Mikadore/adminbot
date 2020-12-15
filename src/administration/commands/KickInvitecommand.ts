@@ -2,7 +2,7 @@ import {Command}            from './../../command';
 import {Message, Client}    from 'discord.js';
 import {member}             from './../../util/resolver';
 
-export class KickCommand implements Command {
+export class KickInviteCommand implements Command {
     public async run(command: string, msg: Message, bot: Client) : Promise<void> 
     {
         if(!msg.member!.hasPermission('KICK_MEMBERS'))
@@ -18,7 +18,27 @@ export class KickCommand implements Command {
             return;
         }
         try {
-            let mbr     =   await member(user, msg, bot);
+            let mbr = await member(user, msg, bot);
+            try {
+                let channel = msg.guild!.channels.resolve(msg.channel.id);
+                if(channel)
+                {
+                    let invite = await channel.createInvite({
+                        temporary:  false,
+                        maxAge:     60*60*24,
+                        maxUses:    1,
+                        reason:     'ikick invoked' 
+                    });
+
+                    let dm = await mbr.createDM();
+                    await dm.send(invite.url);
+
+                }
+            } catch 
+            {
+                await msg.channel.send("Could not DM invite link, aborting").catch(console.error);
+                return;
+            }
             let reason  =   array.slice(1).join(' ');
             try {
                 await mbr.kick(reason);
@@ -33,12 +53,12 @@ export class KickCommand implements Command {
         }
     }
 
-    public command = ["kick-invite", "ikick", "kickinv"];
+    public command = ["kick", "k"];
     
     public metadata = {
-        name: "Kick Invite",
-        usage: "kick-invite <user> <optional | reason>",
-        description: "Kicks a user and sends him an invite to the server",
+        name: "Kick",
+        usage: "kick <user> <optional | reason>",
+        description: "Kicks a user from the server the command is invoked in",
         module: "Administration"
     };
 };
