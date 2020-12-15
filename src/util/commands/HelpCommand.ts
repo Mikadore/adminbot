@@ -63,7 +63,7 @@ export class HelpCommand implements Command {
                 msg.channel.send(embed).catch(err => console.error(err));
             } else 
             {
-                msg.channel.send(`Cannot find command '${command}'`).catch(err => console.error(err));
+                msg.channel.send(`Cannot find command \`${command}\``).catch(err => console.error(err));
             }
         }
     }

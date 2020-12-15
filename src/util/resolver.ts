@@ -1,38 +1,28 @@
-import {User, Message, GuildMember, Client} from 'discord.js';
+import {User, Message, GuildMember, Client, MessageMentions} from 'discord.js';
 
 export async function user(str: string, msg: Message, bot: Client) : Promise<User>
 {
-    let user = msg.mentions.users.first();
-    if(user !== undefined)
+    const matches = str.match(/.*<@!?(\d+)>.*/);
+    if(matches)
     {
-        return user;
+        const ID    = matches[1];
+        return await bot.users.fetch(ID);
     }
-    
-    user = bot.users.cache.find(user => user.username == str || user.tag == str || user.id == str);
-    if(user !== undefined)
-    {
-        return user;
-    }
-    return await bot.users.fetch(str, true, true);
+    const user = bot.users.cache.find(usr => usr.id === str || usr.tag === str || usr.username === str);
+    return user ? user : await bot.users.fetch(str, true, true);
 }
 export async function member(str: string, msg: Message, bot: Client) : Promise<GuildMember> 
 {
-    let user = msg.mentions.users.first();
-    if(user !== undefined)
+    const matches = str.match(/.*<@!?(\d+)>.*/);
+    if(matches)
     {
-        const member = await msg.guild?.members.fetch(user);
-        if(member !== undefined)
-        {
-            return member;
-        }        
-    }
-    let member = msg.guild?.members.cache.find(user => user.user.username == str || user.user.tag == str || user.id == str );
-    if(member !== undefined)
-    {
-        return member;
-    }
-    return await msg.guild!.members.fetch({
-        user: str, 
+        const ID    = matches[1];
+        return await msg.guild!.members.fetch(ID);
+    } 
+    const mbr = msg.guild!.members.cache.find(usr => usr.id === str || usr.user.tag === str || usr.user.username === str);
+
+    return mbr ? mbr : await msg.guild!.members.fetch({
+        user: str,
         force: true
     });
 }

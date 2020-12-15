@@ -12,19 +12,50 @@ export class InfoCommand implements Command {
         }
         try {
             let usr = await user(command, msg, bot);
+            
+            const requestedByAvatar = msg.author.displayAvatarURL({
+                format: "jpg",
+                size: 4096
+            });
+            
+            const avatarUrl = usr.displayAvatarURL({
+                                format: "jpg",
+                                size: 64
+            });
+            const dateString = usr.createdAt.toUTCString();
 
             let infoEmbed = new MessageEmbed()
-                .setImage(usr.avatarURL({
-                    format: "jpg",
-                    dynamic: true,
-                    size: 64
-                })!)
-                .setFooter(`Requested by ${msg.author.username}`)
+                .setThumbnail(avatarUrl)
+                .setFooter(`Requested by ${msg.author.username}`, requestedByAvatar)
                 .addFields([
-                    {name: "ID",    value:      usr.id,                 inline: true},
-                    {name: "Tag",   value:      usr.tag,                inline: true},
-                    {name: "Bot",   value:      usr.bot.toString(),     inline: true}
+                    {
+                        name:       "Acount Tag",        
+                        value:      usr.tag,                 
+                        inline:     true
+                    },
+                    {
+                        name:       "Discord ID",       
+                        value:      usr.tag,
+                        inline:     true
+                    },
+                    {
+                        name:       "Bot Account",
+                        value:      usr.bot.toString(),
+                        inline: true
+                    },
+                    {
+                        name:       "Creation Date",
+                        value:      dateString,
+                        inline: true
+                    },
+                    //avatar in MD format
+                    {   
+                        name:       "Avatar URL",
+                        value:      `[URL](${avatarUrl})`,
+                        inline:     true
+                    }
                 ]);
+
             
             msg.channel.send(infoEmbed).catch(err => console.error);
 

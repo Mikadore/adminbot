@@ -5,11 +5,17 @@ import {member}             from './../../util/resolver';
 export class KickCommand implements Command {
     public async run(command: string, msg: Message, bot: Client) : Promise<void> 
     {
+        if(!msg.member!.hasPermission('KICK_MEMBERS'))
+        {
+            await msg.channel.send(`You don't have banning permissions`).catch(console.error);
+            return;
+        }
         let array   = command.split(' ');
         let user    = array[0];  
         if(user.length == 0)
         {
             msg.channel.send(`Need a user to kick!`);
+            return;
         }
         try {
             let mbr     =   await member(user, msg, bot);

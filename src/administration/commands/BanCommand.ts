@@ -5,11 +5,17 @@ import {member}             from './../../util/resolver';
 export class BanCommand implements Command {
     public async run(command: string, msg: Message, bot: Client) : Promise<void> 
     {
+        if(!msg.member!.hasPermission('BAN_MEMBERS'))
+        {
+            await msg.channel.send(`You don't have banning permissions`).catch(console.error);
+            return;
+        }
         let array   = command.split(' ');
         let user    = array[0];  
         if(user.length == 0)
         {
             msg.channel.send(`Need a user to ban!`);
+            return;
         }
         try {
             let mbr     =   await member(user, msg, bot);
@@ -26,6 +32,7 @@ export class BanCommand implements Command {
         } catch 
         {
             msg.channel.send(`Cannot find user \`${user}\`!`).catch(console.error);
+            console.error(`Couldn't find user ${command}`);
         }
     }
 
