@@ -60,10 +60,10 @@ export class HelpCommand implements Command {
             const embed = this.embeds.find(cmd => (cmd.commands.find(elem => elem === command) != undefined));
             if(embed)
             {
-                msg.channel.send(embed).catch(err => console.error(err));
+                await msg.channel.send(embed).catch(console.error);
             } else 
             {
-                msg.channel.send(`Cannot find command \`${command}\``).catch(err => console.error(err));
+                await msg.channel.send(`Cannot find command \`${command}\``).catch(console.error);
             }
         }
     }

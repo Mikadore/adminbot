@@ -9,7 +9,7 @@ export class MemberCommand implements Command {
             const mbr = await member(command, msg, bot);
         } catch 
         {
-            msg.channel.send(`Cannot find member ${command}`).catch(console.error);
+            await msg.channel.send(`Cannot find member ${command}`).catch(console.error);
         }
     }
     public command = ["member", "mem", "m"];

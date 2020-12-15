@@ -7,7 +7,7 @@ export class InfoCommand implements Command {
     {
         if(command.length == 0)
         {
-            msg.channel.send("Need user to lookup!").catch(console.error);
+            await msg.channel.send("Need user to lookup!").catch(console.error);
             return;
         }
         try {
@@ -57,10 +57,10 @@ export class InfoCommand implements Command {
                 ]);
 
             
-            msg.channel.send(infoEmbed).catch(err => console.error);
+            await msg.channel.send(infoEmbed).catch(console.error);
 
         } catch {
-            msg.channel.send(`Cannot find user \`${command}\``).catch(err => console.error(err));
+            await msg.channel.send(`Cannot find user \`${command}\``).catch(console.error);
         }
     }
 

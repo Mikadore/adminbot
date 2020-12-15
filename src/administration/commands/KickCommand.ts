@@ -14,7 +14,7 @@ export class KickCommand implements Command {
         let user    = array[0];  
         if(user.length == 0)
         {
-            msg.channel.send(`Need a user to kick!`);
+            await msg.channel.send(`Need a user to kick!`).catch(console.error);
             return;
         }
         try {
@@ -22,14 +22,14 @@ export class KickCommand implements Command {
             let reason  =   array.slice(1).join(' ');
             try {
                 await mbr.kick(reason);
-                msg.channel.send(`Succesfully kicked <@${mbr.user.id}>`).catch(err => console.error(err));
+                await msg.channel.send(`Succesfully kicked <@${mbr.user.id}>`).catch(console.error);
             } catch 
             {
-                msg.channel.send(`Cannot kick <@${mbr.user.id}>`).catch(err => console.error(err));
+                await msg.channel.send(`Cannot kick <@${mbr.user.id}>`).catch(console.error);
             }
         } catch 
         {
-            msg.channel.send(`Cannot find user \`${user}\`!`).catch(err => console.error(err));
+            await msg.channel.send(`Cannot find user \`${user}\`!`).catch(console.error);
         }
     }
 

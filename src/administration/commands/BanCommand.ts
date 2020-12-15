@@ -14,7 +14,7 @@ export class BanCommand implements Command {
         let user    = array[0];  
         if(user.length == 0)
         {
-            msg.channel.send(`Need a user to ban!`);
+            await msg.channel.send(`Need a user to ban!`).catch(console.error);
             return;
         }
         try {
@@ -24,15 +24,14 @@ export class BanCommand implements Command {
                 await mbr.ban({
                     reason: reason
                 });
-                msg.channel.send(`Succesfully banned <@${mbr.user.id}>`).catch(console.error);
+                await msg.channel.send(`Succesfully banned <@${mbr.user.id}>`).catch(console.error);
             } catch 
             {
-                msg.channel.send(`Cannot ban <@${mbr.user.id}>`).catch(console.error);
+                await msg.channel.send(`Cannot ban <@${mbr.user.id}>`).catch(console.error);
             }
         } catch 
         {
-            msg.channel.send(`Cannot find user \`${user}\`!`).catch(console.error);
-            console.error(`Couldn't find user ${command}`);
+            await msg.channel.send(`Cannot find user \`${user}\`!`).catch(console.error);
         }
     }
 
