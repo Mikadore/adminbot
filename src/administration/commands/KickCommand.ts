@@ -33,7 +33,7 @@ export class KickCommand implements Command {
         }
     }
 
-    public command = ["kick-invite", "ikick", "kickinv"];
+    public command = ["kick", "k"];
     
     public metadata = {
         name: "Kick Invite",

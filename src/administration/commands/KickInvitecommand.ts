@@ -18,22 +18,20 @@ export class KickInviteCommand implements Command {
             return;
         }
         try {
+            console.log("reached this");
             let mbr = await member(user, msg, bot);
             try {
                 let channel = msg.guild!.channels.resolve(msg.channel.id);
-                if(channel)
+                let invite = await channel?.createInvite({
+                    temporary:  false,
+                    maxAge:     60*60*24,
+                    maxUses:    1,
+                    reason:     'ikick invoked' 
+                });
+                if(invite != null)
                 {
-                    let invite = await channel.createInvite({
-                        temporary:  false,
-                        maxAge:     60*60*24,
-                        maxUses:    1,
-                        reason:     'ikick invoked' 
-                    });
-
-                    let dm = await mbr.createDM();
-                    await dm.send(invite.url);
-
-                }
+                    await mbr.send(invite.url);
+                } else throw'';
             } catch 
             {
                 await msg.channel.send("Could not DM invite link, aborting").catch(console.error);
@@ -53,7 +51,7 @@ export class KickInviteCommand implements Command {
         }
     }
 
-    public command = ["kick", "k"];
+    public command = ["kick-invite", "ikick", "kickinv"];
     
     public metadata = {
         name: "Kick",
