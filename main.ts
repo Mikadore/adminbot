@@ -2,6 +2,10 @@ const  config =         require('./config/config.json');
 import {Bot}            from './src/bot';
 import {Administration} from './src/administration/administration'
 import {Utility}        from './src/util/util';
+import {Database}       from './src/db/db';
+
+
+Database.connect();
 
 //Get enviromental variables
 
