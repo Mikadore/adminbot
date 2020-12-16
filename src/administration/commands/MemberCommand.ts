@@ -1,6 +1,6 @@
-import {Message, MessageEmbed, Client} from 'discord.js'; 
-import {Command} from './../../command';
-import {member} from './../../util/resolver';
+import {Message, MessageEmbed, Client}      from 'discord.js'; 
+import {Command}                            from './../../command';
+import {member}                             from './../../util/resolver';
 
 export class MemberCommand implements Command {
     public async run(command: string, msg: Message, bot: Client) : Promise<void> 

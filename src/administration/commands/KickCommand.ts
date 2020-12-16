@@ -36,9 +36,9 @@ export class KickCommand implements Command {
     public command = ["kick", "k"];
     
     public metadata = {
-        name: "Kick Invite",
-        usage: "kick-invite <user> <optional | reason>",
-        description: "Kicks a user and sends him an invite to the server",
+        name: "Kick",
+        usage: "kick <user> <optional | reason>",
+        description: "Kicks a user",
         module: "Administration"
     };
 };

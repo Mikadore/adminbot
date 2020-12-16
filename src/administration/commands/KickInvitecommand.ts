@@ -18,7 +18,6 @@ export class KickInviteCommand implements Command {
             return;
         }
         try {
-            console.log("reached this");
             let mbr = await member(user, msg, bot);
             try {
                 let channel = msg.guild!.channels.resolve(msg.channel.id);
@@ -51,12 +50,12 @@ export class KickInviteCommand implements Command {
         }
     }
 
-    public command = ["kick-invite", "ikick", "kickinv"];
+    public command = ["kick-invite", "ikick", "kickinv", "kickinvite", "invitekick", "invite-kick"];
     
     public metadata = {
-        name: "Kick",
-        usage: "kick <user> <optional | reason>",
-        description: "Kicks a user from the server the command is invoked in",
+        name: "Kick Invite",
+        usage: "kick-invite <user> <optional | reason>",
+        description: "Kicks a user from the server and sends them an invite to the server",
         module: "Administration"
     };
 };

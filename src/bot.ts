@@ -1,6 +1,6 @@
-import {Client} from 'discord.js';
-import {Module} from './module';
-import {Command} from './command';
+import {Client}     from 'discord.js';
+import {Module}     from './module';
+import {Command}    from './command';
 
 export const version  = "1.0.0";
 export const name     = "adminbot";
@@ -12,6 +12,7 @@ export class Bot
 
     public  prefix:     string;
     public  commands:   Command[] = []; 
+    public  modules:    Module[] = [];
 
     constructor(token: string, prefix: string)
     {
@@ -23,6 +24,7 @@ export class Bot
     public registerModule(module : Module) 
     {
         module.register(this);
+        this.modules.push(module);
     }
 
     public run()
