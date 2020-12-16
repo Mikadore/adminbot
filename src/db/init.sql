@@ -15,3 +15,9 @@ CREATE TABLE Tickets
     creation_date   DATETIME,       
     assignee        VARCHAR (32)                /*Snowflake*/
 )
+
+CREATE TABLE TicketsConfig
+(
+    serverid        VARCHAR (32)    NOT NULL,   /*SNOWFLAKE*/
+    messageid       VARCHAR (32)    NOT NULL,   /*SNOWFLAKE*/
+)

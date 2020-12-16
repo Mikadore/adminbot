@@ -2,11 +2,12 @@ import {Module}         from './../module';
 import {InfoCommand}    from './commands/InfoCommand';
 import {HelpCommand}    from './commands/HelpCommand';
 import {Bot}            from './../bot';
-import { ConfigCommand } from './commands/ConfigCommand';
+import {ConfigCommand}  from './commands/ConfigCommand';
 
 export class Utility implements Module {
     commands = [
         new InfoCommand
+        //HelpCommand
     ];
     register(bot: Bot) 
     {
