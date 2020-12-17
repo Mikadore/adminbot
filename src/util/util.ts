@@ -7,7 +7,6 @@ import {ConfigCommand}  from './commands/ConfigCommand';
 export class Utility implements Module {
     commands = [
         new InfoCommand
-        //HelpCommand
     ];
     register(bot: Bot) 
     {

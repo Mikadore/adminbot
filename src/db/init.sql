@@ -1,7 +1,7 @@
 /*
     create tables for the DB to function
 */
-
+CREATE DATABASE discord;
 USE discord;
 
 /*Servers are identified by their snowflake*/
@@ -18,6 +18,7 @@ CREATE TABLE Tickets
 
 CREATE TABLE TicketsConfig
 (
-    serverid        VARCHAR (32)    NOT NULL,   /*SNOWFLAKE*/
-    messageid       VARCHAR (32)    NOT NULL,   /*SNOWFLAKE*/
+    serverid        VARCHAR (32),    NOT NULL,  /*SNOWFLAKE*/
+    messageid       VARCHAR (32),               /*SNOWFLAKE*/
+    parentid        VARCHAR (32)
 )

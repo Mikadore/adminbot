@@ -1,7 +1,7 @@
 import {Message, Client, MessageEmbed}      from 'discord.js';
 import {Command}                            from './../../command';
 import {name, version}                      from './../../bot';
-
+import {embedPager}                         from './../pages';
 
 
 export class HelpCommand implements Command {
@@ -11,7 +11,7 @@ export class HelpCommand implements Command {
         embed: MessageEmbed
     }[] = [];
 
-    private helpPages: MessageEmbed[][] = [];
+    private helpPages: MessageEmbed[] = [];
 
     constructor(cmds: Command[], prefix: string)
     {
@@ -34,7 +34,6 @@ export class HelpCommand implements Command {
 
         let counter = 1;
         
-        let page: MessageEmbed[] = [];
         for(let cmd of this.commands)
         {   
             embed.addField(
@@ -43,13 +42,10 @@ export class HelpCommand implements Command {
                 false
             );
             counter++;
-            page.push(embed);
-
-            if(counter == 25)
+            if(counter == 15)
             {
                 counter = 0;
-                this.helpPages.push(page);
-                page = [];
+                this.helpPages.push(embed);
                 embed = new MessageEmbed()
                         .setColor("#FF0000")
                         .setFooter(`${name} | ${version}`)
@@ -59,7 +55,7 @@ export class HelpCommand implements Command {
 
         if(counter != 0)
         {
-            this.helpPages.push(page);
+            this.helpPages.push(embed);
         }
 
         for(let cmd of this.commands)
@@ -101,53 +97,19 @@ export class HelpCommand implements Command {
     {
         if(command.length == 0)
         {
-            try {
-                let sent = await msg.channel.send(this.helpPages[0]);
-                
-                if(this.helpPages.length > 1)
-                {
-                    let collector = sent.createReactionCollector((reaction, user) => !user.bot, {
-                        max: 300,
-                    });
-
-                    let currentIndex = 0;
-
-                    await sent.react("➡️");
-
-                    collector.on('collect', async (reaction, user) => {
-                        if(reaction.emoji.name === "⬅️")
-                        {
-                            if(currentIndex > 0)
-                            {
-                                currentIndex--;
-                            }
-                            reaction.message.edit(this.helpPages[currentIndex]);
-                        } else if (reaction.emoji.name === "➡️")
-                        {
-                            if(currentIndex < this.helpPages.length - 1)
-                            {
-                                currentIndex++;
-                            }
-                            reaction.message.edit(this.helpPages[currentIndex]);
-                        }
-                        await reaction.message.reactions.removeAll().catch(console.error);
-
-                        if(currentIndex !== 0)
-                            await reaction.message.react("⬅️").catch(console.error);
-                        if(currentIndex !== this.helpPages.length - 1)
-                            await reaction.message.react("➡️").catch(console.error);
-                        
-                    });
-
-                    collector.on('end', async collected => {
-                        await collector.message.reactions.removeAll().catch(console.error);
-                    });
-                }
-            } catch(err)
+            if(this.helpPages.length > 1)
             {
-                await msg.channel.send("Error processing command").catch(console.error);
+                try {
+                    const sent  = await msg.channel.send(this.helpPages[0]);
+                    await embedPager(sent, this.helpPages, 0, 300);
+                } catch(err)
+                {
+                    console.error(err);
+                }
+            } else 
+            {
+                await msg.channel.send(this.helpPages[0]).catch(console.error);
             }
-
         } else 
         {
             const embed = this.embeds.find(cmd => (cmd.commands.find(elem => elem === command) != undefined));
