@@ -1,2 +1,2 @@
-## A general purpose discord bot
-highly WIP, I'll add some sensible readme once this is usable
+### A general purpose discord bot
+mikdore#8215

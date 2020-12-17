@@ -16,6 +16,7 @@ export class Administration implements Module {
         {
             bot.commands.push(cmd);
         }
+        bot.modules.push(this);
     }
     public name = "Administration";
     public config = {};
