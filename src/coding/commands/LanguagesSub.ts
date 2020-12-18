@@ -4,6 +4,9 @@ import 'node-fetch';
 
 export async function languages(msg: Message, bot: Client)
 {
-    let resp = await (await fetch("https://godbolt.org/api/languages")).text();
-    msg.channel.send(resp);
+    let response = await fetch("https://godbolt.org", {
+        headers: [["Accept", "application/json"]]
+    });
+    let json = await response.json();
+    await msg.channel.send(JSON.stringify(json));
 }
