@@ -2,6 +2,7 @@ const  config =         require('./config/config.json');
 import {Bot}            from './src/bot';
 import {Administration} from './src/administration/administration'
 import {Utility}        from './src/util/util';
+import {Coding}         from './src/coding/coding';
 import {Database}       from './src/db/db';
 
 
@@ -23,6 +24,8 @@ defined(TOKEN, "TOKEN");
 const bot = new Bot(TOKEN!, config.prefix);
 
 bot.registerModule(new Administration);
+
+bot.registerModule(new Coding);
 
 //needs to go last to register all commands for `help`
 bot.registerModule(new Utility);
