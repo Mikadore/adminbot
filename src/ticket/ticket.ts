@@ -1,13 +1,13 @@
 import {Module}         from './../module';
 import {Bot}            from './../bot';
 
-export class Utility implements Module {
+export class Tickets implements Module {
     commands = [
     ];
     register(bot: Bot) 
     {
     }
-    name = "Utility";
+    name = "Tickets";
 
     public config = {};
 };
