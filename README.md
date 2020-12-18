@@ -47,3 +47,29 @@ Add me on discord `mikdore#8215` or email `admin@mikadore.eu`
 
 I'm also available for private developement and/or
 consultation especially in regards to this bot
+
+## List of features & TODO
+Submit an issue for feature requests or contact me for more
+elaborate stuff.
+- Administration
+  - [x] Ban Command
+  - [x] Kick Command
+  - [x] Kick Invite Command
+  - [ ] Cleaning messages
+  - [ ] Role Management
+  - [ ] Removing channels
+  - [ ] Nicknaming
+
+- Utility
+    - [x] Content Command
+    - [x] Help Command
+    - [x] Info command
+    - [ ] config command
+
+- Tickets
+  - [ ] Ticket Command
+  - [ ] Database integration 
+
+- Database integration
+  - [x] Connecting with credentials  
+  
