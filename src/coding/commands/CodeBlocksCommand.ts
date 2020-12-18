@@ -16,7 +16,7 @@ export class CodeBlocksCommand implements Command {
             "For more information see https://highlightjs.org/static/demo/"
         ).catch(console.error);
     }
-    public command = ["codeblocks", "code", "codeblock"];
+    public command = ["codeblocks", "codeblock"];
     public metadata = {
         name: "Codeblocks",
         usage: "codeblocks",
