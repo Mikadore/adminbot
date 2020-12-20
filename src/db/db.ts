@@ -37,6 +37,11 @@ export class DB
         });
     }
 
+    public async query(sql: string, ...values: any)
+    {
+        return await this.connection.query(sql, values);
+    }
+
 };
 
 const defined = (x: any, name: string) => {

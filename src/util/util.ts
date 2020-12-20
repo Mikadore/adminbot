@@ -25,5 +25,4 @@ export class Utility implements Module {
     }
     name = "Utility";
 
-    public config = {};
 };

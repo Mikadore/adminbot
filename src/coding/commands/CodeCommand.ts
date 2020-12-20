@@ -1,6 +1,8 @@
 import {Command}                from './../../command';
 import {Client, Message}        from 'discord.js';
 import {showLanguages}          from './LanguagesSub'
+import {showCompilers}          from './CompilersSub';
+
 export class CodeCommand implements Command {
     public async run(command: string, msg: Message, bot: Client) : Promise<void>
     {
@@ -8,15 +10,26 @@ export class CodeCommand implements Command {
         try {
             switch(arr[0])
             {
+                case 'compilers': {
+                    if(arr[1] !== undefined)
+                    {
+                        await showCompilers(arr[1], msg, bot);
+                    } else 
+                    {
+                        await msg.channel.send('Invalid usage; use `code compilers <language>`').catch(console.error);
+                    }
+                    break;
+                }
                 case 'languages': { 
-                    await showLanguages(msg, bot); break;
+                    await showLanguages(msg, bot); 
+                    break;
                 }
                 case '': {
                     await msg.channel.send('Invalid usage, use \`help code\` to see the usage of this command');
                     break;
                 }
                 default: {
-                    await msg.channel.send(`<options> must be one of [languages]`).catch(console.error);
+                    await msg.channel.send(`<options> must be one of [languages, compilers]`).catch(console.error);
                     break;
                 }
             }

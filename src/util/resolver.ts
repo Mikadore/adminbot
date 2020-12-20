@@ -11,6 +11,7 @@ export async function user(str: string, msg: Message, bot: Client) : Promise<Use
     const user = bot.users.cache.find(usr => usr.id === str || usr.tag === str || usr.username === str);
     return user ? user : await bot.users.fetch(str, true, true);
 }
+
 export async function member(str: string, msg: Message, bot: Client) : Promise<GuildMember> 
 {
     const matches = str.match(/.*<@!?(\d+)>.*/);
@@ -26,6 +27,7 @@ export async function member(str: string, msg: Message, bot: Client) : Promise<G
         force:  true
     });
 }
+
 export async function message(str: string, msg: Message, bot: Client) : Promise<Message>
 {
     const matches = str.match(/^https:\/\/discord.com\/channels\/(\d+)\/(\d+)\/(\d+)$/);

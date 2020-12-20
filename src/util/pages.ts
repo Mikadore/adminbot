@@ -2,7 +2,7 @@ import {Message, MessageEmbed} from 'discord.js';
 export async function embedPager(message: Message, embeds: MessageEmbed[], index: number, maxTime: number)
 {
     let collector = message.createReactionCollector((reaction, user) => !user.bot, {
-        max: maxTime,
+        time: maxTime*1000,
     });
 
     let currentIndex = index;

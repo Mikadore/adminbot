@@ -7,9 +7,9 @@ export const name     = "adminbot";
 
 export class Bot 
 {
-    private bot:        Client;
     private token:      string;
 
+    public  bot:        Client;
     public  prefix:     string;
     public  commands:   Command[] = []; 
     public  modules:    Module[] = [];

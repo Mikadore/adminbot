@@ -21,6 +21,8 @@ CREATE TABLE TicketsConfig
 (
     serverid        VARCHAR (32),    NOT NULL,  /*SNOWFLAKE*/
     messageid       VARCHAR (32),               /*SNOWFLAKE*/
+    messagechanid   VARCHAR (32),
     parentid        VARCHAR (32),
+
     PRIMARY KEY(serverid)
 )
