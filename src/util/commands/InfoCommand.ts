@@ -11,7 +11,7 @@ export class InfoCommand implements Command {
             return;
         }
         try {
-            let usr = await user(command, msg, bot);
+            let usr = await user(command, bot);
             
             const requestedByAvatar = msg.author.displayAvatarURL({
                 format: "png",

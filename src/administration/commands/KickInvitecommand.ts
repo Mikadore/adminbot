@@ -18,7 +18,7 @@ export class KickInviteCommand implements Command {
             return;
         }
         try {
-            let mbr = await member(user, msg, bot);
+            let mbr = await member(user, msg.guild!, bot);
             try {
                 let channel = msg.guild!.channels.resolve(msg.channel.id);
                 let invite = await channel?.createInvite({

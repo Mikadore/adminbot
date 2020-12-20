@@ -18,7 +18,7 @@ export class BanCommand implements Command {
             return;
         }
         try {
-            let mbr     =   await member(user, msg, bot);
+            let mbr     =   await member(user, msg.guild!, bot);
             let reason  =   array.slice(1).join(' ');
             try {
                 await mbr.ban({

@@ -6,7 +6,7 @@ export class ContentCommand implements Command {
     public async run(command: string, msg: Message, bot: Client) : Promise<void> 
     {
         try {
-            let m = await message(command, msg, bot);
+            let m = await message(command, msg.guild!, bot);
             let gChan = <GuildChannel>m.channel;
             
             let perms = gChan.permissionsFor(msg.author);

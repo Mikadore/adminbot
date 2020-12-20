@@ -15,7 +15,6 @@ export class Utility implements Module {
     register(bot: Bot) 
     {
         bot.modules.push(this);
-        let config = new ConfigCommand(bot.modules);
         for(let cmd of this.commands)
         {
             bot.commands.push(cmd);

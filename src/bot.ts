@@ -23,8 +23,8 @@ export class Bot
 
     public registerModule(module : Module) 
     {
-        module.register(this);
         this.modules.push(module);
+        module.register(this);
     }
 
     public run()
@@ -40,6 +40,14 @@ export class Bot
                 }
             }).catch(console.error);
             console.log(`Started the bot and logged in as ${this.bot.user?.tag}`);
+
+            for(let module of this.modules)
+            {
+                if(module.init)
+                {
+                    module.init(this);   
+                }
+            }
         });
         this.bot.on('message', async msg => {
             if(msg.author.bot) return;

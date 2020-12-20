@@ -12,9 +12,11 @@
   "license": "ISC",
   "repository": "https://github.com/Mikadore/adminbot",
   "dependencies": {
+    "@discordjs/opus": "^0.3.3",
     "@types/node": "^14.14.13",
     "@types/node-fetch": "^2.5.7",
     "discord.js": "^12.5.1",
+    "ffmpeg-static": "^4.2.7",
     "mariadb": "^2.5.2",
     "node-fetch": "^2.6.1",
     "tsc": "^1.20150623.0",

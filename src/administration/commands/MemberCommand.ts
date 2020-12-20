@@ -6,7 +6,7 @@ export class MemberCommand implements Command {
     public async run(command: string, msg: Message, bot: Client) : Promise<void> 
     {
         try {
-            const mbr = await member(command, msg, bot);
+            const mbr = await member(command, msg.guild!, bot);
         } catch 
         {
             await msg.channel.send(`Cannot find member ${command}`).catch(console.error);
