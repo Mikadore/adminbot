@@ -85,7 +85,7 @@ export class InfoCommand implements Command {
                     }, 
                     {
                         name:       "Roles",
-                        value:      roleString,
+                        value:      roleString ? roleString : "none",
                         inline:     false
                     }
                 ])
@@ -100,9 +100,9 @@ export class InfoCommand implements Command {
                         false
                     );
                 }
-            } catch 
+            } catch(err)
             {
-                infoEmbed.footer!.text += " | Note: not a member of the server";
+                console.error(err);
             }
 
             const daysSince = Math.floor((Date.now() - usr.createdTimestamp)/(1000*60*60*24));

@@ -1,14 +1,22 @@
-import {Module}         from './../module';
-import {Bot}            from './../bot';
-import {Database}       from './../db/db';
-import {message}        from './../util/resolver';
+import {Module}                 from './../module';
+import {Bot}                    from './../bot';
+import {Database}               from './../db/db';
+import {message}                from './../util/resolver';
+import { ReactionCollector }    from 'discord.js';
 
 export class Tickets implements Module {
     commands = [
 
     ];
     register(bot: Bot) 
-    {}
+    {
+        for(let cmd of this.commands)
+        {
+            bot.commands.push(cmd);
+        }
+    }
+
+    private collector?: ReactionCollector;
 
     async init(bot: Bot)
     {
@@ -18,10 +26,7 @@ export class Tickets implements Module {
             try {
                 let guild   =   await bot.bot.guilds.fetch(server['serverid']);
                 let msg     =   await message(server['messageid'], guild, bot.bot);
-                let collector = msg.createReactionCollector(() => true);
-                collector.on('collect', async (reaction, user) => {
-                    
-                });
+
             } catch(err)
             {
                 console.error(err);

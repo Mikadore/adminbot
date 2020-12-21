@@ -4,25 +4,25 @@
 CREATE DATABASE discord;
 USE discord;
 
-/*Servers are identified by their snowflake*/
+/*ID === snowflake*/
 
 CREATE TABLE Tickets
 (
-    serverid        VARCHAR (32)    NOT NULL,   /*Snowflake*/
-    ticketid        VARCHAR (32)    NOT NULL,   /*Snowflake of the ticket's channel*/
+    serverid        VARCHAR (32)    NOT NULL,  
+    ticketid        VARCHAR (32)    NOT NULL,   
     open            BOOL,          
-    creator         VARCHAR (32),               /*Snowflake*/
+    creator         VARCHAR (32),              
     creation_date   DATETIME,       
-    assignee        VARCHAR (32),               /*Snowflake*/
+    assignee        VARCHAR (32),               
     PRIMARY KEY(serverid)
 )
 
 CREATE TABLE TicketsConfig
 (
-    serverid        VARCHAR (32),    NOT NULL,  /*SNOWFLAKE*/
-    messageid       VARCHAR (32),               /*SNOWFLAKE*/
+    serverid        VARCHAR (32)    NOT NULL,   
+    messageid       VARCHAR (32),               
     messagechanid   VARCHAR (32),
     parentid        VARCHAR (32),
-
+    emojiid         VARCHAR (32),
     PRIMARY KEY(serverid)
 )

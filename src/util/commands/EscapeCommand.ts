@@ -2,7 +2,7 @@ import {Command}            from './../../command';
 import {Message, Client, GuildChannel}    from 'discord.js';
 import {message}            from './../resolver';
 
-export class ContentCommand implements Command {
+export class EscapeCommand implements Command {
     public async run(command: string, msg: Message, bot: Client) : Promise<void> 
     {
         try {
@@ -19,20 +19,22 @@ export class ContentCommand implements Command {
             
             if(perms.has('VIEW_CHANNEL'))
             {
-                let file : Buffer;
+                let text : string;
                 if(m.embeds.length > 0)
                 {
-                    file = Buffer.from(JSON.stringify(m.embeds), 'utf8');
+                    text = JSON.stringify(m.embeds);
                 } else 
                 {
-                    file = Buffer.from(m.content, "utf8");
+                    text = m.content;
                 }
-                await msg.channel.send({
-                    files: [{
-                        attachment: file,
-                        name:       'raw.txt'       
-                    }]
-                }).catch(console.error);
+                
+                let escaped = '```\n';
+                
+                escaped +=  text.replace(/```/g, '`\u200B`\u200B`');
+                escaped += '\n```';
+                
+                await msg.channel.send(escaped).catch(console.error);
+
             } else throw 'no perms';
 
         } catch(err)
@@ -40,11 +42,11 @@ export class ContentCommand implements Command {
             await msg.channel.send(`Cannot find '${command}'`).catch(console.error);
         }
     }
-    public command = ["content", "raw"];
+    public command = ["escape"];
     public metadata = {
-        name:           "Content",
-        description:    "Fetches the raw text of a message",
-        usage:          "content <message>",
+        name:           "Escape",
+        description:    "Escapes the content of a message",
+        usage:          "escape <message>",
         module:         "Utility"
     }
 };
