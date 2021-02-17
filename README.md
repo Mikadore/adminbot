@@ -1,3 +1,5 @@
+# This project is INACTIVE as of right now. I might continue work some day
+
 # Admin-O-Bot
 (C) Mikdore 2020
 
